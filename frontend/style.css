@@ -1,0 +1,10 @@
+.header{
+    border:1px solid red;
+}
+
+.expenses{
+    border:1px solid green;
+}
+.savings{
+    border:1px solid blue;
+}
