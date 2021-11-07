@@ -2,11 +2,19 @@ import IRepository from "./repository";
 import UserDto from "../dtos/userDto";
 import Expense, { IExpense } from '../db/models/expense'
 import { User } from "./models/user";
+import mongoose from 'mongoose';
+require('dotenv').config();
+const {DB_HOST, DB_NAME} = process.env
 
 export class Database implements IRepository {
 
-    private initRepo(): void {
-        // TODO Implement logic to connect to Mongo
+    private async initRepo():Promise<void> {
+        const options = {
+            // useNewUrlParser: true,
+            // useUnifiedTopology: true,
+            // useCreateIndex: true
+        };
+        mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`, options).then(() => console.log('DB connection succsesful'));
     }
 
     constructor() {
