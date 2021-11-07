@@ -2,19 +2,20 @@ import IRepository from "./repository";
 import UserDto from "../dtos/userDto";
 import Expense, { IExpense } from '../db/models/expense'
 import { User } from "./models/user";
-import mongoose from 'mongoose';
+import mongoose, { ConnectOptions } from 'mongoose';
+// import mongoose, { ConnectOptions } from "mongoose";
 require('dotenv').config();
-const {DB_HOST, DB_NAME} = process.env
+const { DB_HOST, DB_NAME } = process.env
 
 export class Database implements IRepository {
 
-    private async initRepo():Promise<void> {
+    private async initRepo(): Promise<void> {
         const options = {
-            // useNewUrlParser: true,
-            // useUnifiedTopology: true,
-            // useCreateIndex: true
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+            useCreateIndex: true
         };
-        mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`, options).then(() => console.log('DB connection succsesful'));
+        mongoose.connect(`mongodb://${DB_HOST}/${DB_NAME}`, options as ConnectOptions).then(() => console.log('DB connection succsesful'));
     }
 
     constructor() {
@@ -22,7 +23,7 @@ export class Database implements IRepository {
     }
 
     // loginUser(): Promise<UserDto | Error> {
-        
+
     // };
 
     async getFixedMonthlyBudget(): Promise<IExpense | Error> {
